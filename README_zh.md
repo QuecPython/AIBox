@@ -1,4 +1,4 @@
-# QuecPython -AIbox
+# QuecPython -AIbox聊天机器人
 
 ## 目录
 
@@ -33,6 +33,7 @@ QuecPython 推出了小智平台 AI 聊天机器人解决方案。该方案基�
 - **硬件：**
   - 联系移远官方获取 AI 开发板及配件。
   - 电脑（Windows 7、Windows 10 或 Windows 11）
+  - 一套定制外壳
   - 喇叭
     - 任意 2-5W 功率的喇叭即可
     - [移远商城购买链接](https://www.quecmall.com/goods-detail/2c90800c94028da201948249e9f4012d)

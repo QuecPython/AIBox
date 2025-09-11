@@ -1,4 +1,4 @@
-# QuecPython AI Chatbot Based on Xiaozhi Platform
+# QuecPython-AIbox chatbot
 
 ## Table of Contents
 
@@ -33,6 +33,7 @@ Before getting started, ensure you have the following prerequisites:
 - **Hardware:**
   - Contact Quectel to obtain the AI development board and accessories.
   - Computer (Windows 7, Windows 10, or Windows 11)
+  - A set of custom-made covers
   - Speaker
     - Any 2-5W speaker will work
     - [Purchase link from Quectel Mall](https://www.quecmall.com/goods-detail/2c90800c94028da201948249e9f4012d)
