@@ -11,7 +11,7 @@ from usr.logging import getLogger
 import sys_bus
 # from usr.ui import lvglManager
 from usr.ui import *
-
+import ujson as json
 
 logger = getLogger(__name__)
 
@@ -54,25 +54,29 @@ class Application(object):
         self.__voice_activity_event = Event()
         self.__keyword_spotting_event = Event()
 
+
+        
     def __record_thread_handler(self):
         """纯粹是为了kws&vad能识别才起的线程持续读音频"""
-        logger.debug("record thread handler enter")
+        logger.debug("record thread handler enter") 
+        count = 0   
         while not self.__record_thread_stop_event.is_set():
             self.audio_manager.opus_read()
             utime.sleep_ms(5)
         logger.debug("record thread handler exit")
+       
 
     def start_kws(self):
         self.audio_manager.start_kws()
         self.__record_thread_stop_event.clear()
-        self.__record_thread = Thread(target=self.__record_thread_handler)
+        self.__record_thread = Thread(target=self.__record_thread_handler)       
         self.__record_thread.start(stack_size=64)
-    
+        
+        
     def stop_kws(self):
         self.__record_thread_stop_event.set()
         self.__record_thread.join()
         self.audio_manager.stop_kws()
-
     def start_vad(self):
         self.audio_manager.start_vad()
     
@@ -100,13 +104,11 @@ class Application(object):
                         # 有人声
                         sys_bus.publish("update_status","listening")
                         if not is_listen_flag:
-                            self.audio_manager.stop()
-                            self.audio_manager.aud.stopPlayStream()
-                            # logger.debug("Clear the audio cache:清除播放缓存{}".format(self.audio_manager.stop()))
+                            self.__protocol.abort()
                             self.__protocol.listen("start")
                             is_listen_flag = True
                         self.__protocol.send(data)
-                        # logger.debug("send opus data to server")
+                        # logger.debug("send opus data to server:",data)
                     else:
                         if is_listen_flag:
                             self.__protocol.listen("stop")
@@ -137,14 +139,11 @@ class Application(object):
             self.__keyword_spotting_event.clear()
         else:
             self.__keyword_spotting_event.set()
-        sys_bus.publish("update_screen","main_screen")
-        sys_bus.publish("update_emoji","happy")
+
 
     def on_voice_activity_detection(self, state):
-        gc.collect()
         logger.info("on_voice_activity_detection: {}".format(state))
         if state == 1:
-            self.audio_manager.stop()
             self.__voice_activity_event.set()  # 有人声
         else:
             self.__voice_activity_event.clear()  # 无人声
@@ -160,14 +159,45 @@ class Application(object):
         raise NotImplementedError("handle_stt_message not implemented")
 
     def handle_tts_message(self, msg):
-        state = msg["state"]
-        if state == "start":
-            sys_bus.publish("update_status","speaking")
-        elif state == "stop":
-            sys_bus.publish("update_status","listening")
-        else:
-            pass
+        # state = msg["state"]
+        # if state == "start":
+        #     sys_bus.publish("update_status","speaking")
+        # elif state == "stop":
+        #     sys_bus.publish("update_status","listening")
+        # else:
+        #     pass
         raise NotImplementedError("handle_tts_message not implemented")
+    
+    
+    
+    def handle_mcp_message(self, msg):
+        print("msg: ", msg)
+        data=msg.to_bytes()
+
+        # 解析JSON字符串为字典
+        data_dict = json.loads(data)
+        id=1
+        # 提取method内容
+        method = data_dict['payload']['method']
+        if 'id' in data_dict['payload']:
+            id=data_dict['payload']['id']
+        print("MCP请求: ",method)
+        
+        if method == "initialize":
+            self.__protocol.mcp_initialize()
+        elif method == "tools/list":
+            self.__protocol.mcp_tools_list()
+        elif method =="tools/call":
+            handle =data_dict['payload']['params']['name']
+            if handle == "self.setvolume_down()":     
+                print("当前音量大小",self.audio_manager.setvolume_down())
+            elif handle == "self.setvolume_up()":
+                print("当前音量大小",self.audio_manager.setvolume_up())
+            elif handle == "self.setvolume_close()":
+                print("当前音量大小",self.audio_manager.setvolume_close())
+            self.__protocol.mcp_tools_call(tool_name=handle,req_id=id)
+        # raise NotImplementedError("handle_mcp_message not implemented")
+    
 
 #"happy" "cool"  "angry"  "think"
 # ... existing code ...
@@ -182,16 +212,21 @@ class Application(object):
             sys_bus.publish("update_emoji", emoj_value)
             perv_emoj = emoj_value
     
-        raise NotImplementedError("handle_llm_message not implemented")
+        # raise NotImplementedError("handle_llm_message not implemented")
         
     def handle_iot_message(data, msg):
         raise NotImplementedError("handle_iot_message not implemented")
+
         
 
+    
     def run(self):
         self.charge_manager.enable_charge()
         self.audio_manager.open_opus()
         self.start_kws()
+
+       
+        
 
 
 if __name__ == "__main__":
