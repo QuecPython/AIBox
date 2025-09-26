@@ -1,100 +1,114 @@
-# QuecPython-AIbox chatbot
+# AIbox Chatbot
 
-## Table of Contents
+## project brief
 
-- [Introduction](#Introduction)
-- [Features](#Features)
-- [Quick_Start](#Quick_Start)
-  - [Prerequisites](#Prerequisites)
-  - [Installation](#Installation)
-  - [Running_Application](#Running_Application)
-- [Contributing](#Contributing)
-- [License](#License)
-- [Support](#Support)
+This project is a chatbot developed based on the Quectel EC800MCNLE development board, featuring functions such as voice recognition, emotion display, character switching, and sound simulation. 
+Through this project, we hope to enable everyone to gain an understanding of AI hardware development and apply the rapidly advancing large language models to actual hardware devices.
 
-## Introduction
+<img src="./media/AIbox.png" style="zoom: 100%;" />
 
-QuecPython introduces the Xiaozhi Platform AI Chatbot solution. This solution is based on the WebSocket protocol, offering cross-platform compatibility and supporting most QuecPython modules.
+## Open source directory structure
 
-This demo uses an AI development board equipped with the EC800MCNLE module.
+You can search for the required materials according to the following directory structure description.
 
-## Features
+<img src="./media/Directory.png" style="zoom: 100%;" />
 
-- Supports voice interruption/barge-in.
-- Supports keyword-based voice wake-up.
-- Uses Python for easy secondary development.
+## Project Function
 
-## Quick_Start
+**1.  One-step solution, the ultimate choice**
 
-### Prerequisites
+-  Multiple AI conversation characters, which can be switched to any preferred voice at any time.
 
-Before getting started, ensure you have the following prerequisites:
+-  Multilingual conversations, can serve as a portable language learning companion for practicing foreign languages.
 
-- **Hardware:**
-  - Contact Quectel to obtain the AI development board and accessories.
-  - Computer (Windows 7, Windows 10, or Windows 11)
-  - A set of custom-made covers
-  - Speaker
-    - Any 2-5W speaker will work
-    - [Purchase link from Quectel Mall](https://www.quecmall.com/goods-detail/2c90800c94028da201948249e9f4012d)
-- **Software:**
-  - Debugging tool [QPYcom](https://images.quectel.com/python/2022/12/QPYcom_V3.6.0.zip)
-  - QuecPython firmware (beta firmware is available in the `fw` directory of the repository)
-  - Python text editor (e.g., [VSCode](https://code.visualstudio.com/), [PyCharm](https://www.jetbrains.com/pycharm/download/))
+-  Connect to multiple large models (Douba, Deepseek, Qwen3), assist with office work, and large models can easily handle it.<img src="./media/yun.png" style="zoom: 100%;" />
 
-### Installation
 
-1. **Clone the Repository:**
 
-   ```bash
-   git clone https://github.com/QuecPython/AIBox 
-   ```
+**2.Intelligent memory + emotional visualization, rejecting robots without emotions**
 
-2. **Flash the Firmware:**
-   Follow the [instructions](https://python.quectel.com/doc/Application_guide/zh/dev-tools/QPYcom/qpycom-dw.html#%E4%B8%8B%E8%BD%BD%E5%9B%BA%E4%BB%B6) to flash the firmware onto the development board.
+- **Dynamic Context Management**: Maintaining Memory of Conversation Even After Interruption
 
-### Running_Application
+- **LCD Expression Feedback**: Enhances the authenticity of interaction through emojis such as 😊/🤔/😠
 
-1. **Hardware Connection:**
-   This demo uses the Quectel AI development board. Contact Quectel if needed. Connect the hardware as shown below:
+  <img src="./media/emoji.png" style="zoom: 100%;" />
 
-   <img src="./media/AIbox.jpg" style="zoom:50%;" />
+**3.Can interrupt and reject the AI's monologue at any time**
 
-   Connect to the host computer via Type-C.
-   
-3. **Download the Code to the Device:**
+- Traditional AI: It must wait until it "finishes reading the script" before it can proceed ❌
 
-   - Launch the QPYcom debugging tool.
-   - Connect the data cable to the computer.
-   - Press the **PWRKEY** button on the development board to power on the device.
-   - Follow the [instructions](https://developer.quectel.com/doc/quecpython/Getting_started/en/4G/first_python.html#PC与模组间的文件传输) to import all files from the `code` folder into the module's file system, preserving the directory structure.
+- AI box: Supports voice interruption, just like chatting with a real person. ✅
 
-4. **Run the Application:**
+  
 
-   - Select the `File` tab.
-   - Choose the `_main.py` script.
-   - Right-click and select `Run` or use the `Run` shortcut button to execute the script.
+**4.The agent recognizes the voice intention and automatically controls the device**
 
-5. **After keyword wake-up, start a conversation. Refer to the runtime log:**
+- "The sound is a bit loud. Turn it down a little." The agent issues a volume adjustment command to lower the volume.
 
-   <img src="./media/run.png" style="zoom:80%;" />
 
-6. For a usage example, refer to the demo video: `You can go to the media file under this folder to view the usage sample video by yourself`
 
-## Contributing
+**5.Environmentally friendly material casing, exquisite and durable with excellent hand feel**
 
-We welcome contributions to improve this project! Follow these steps to contribute:
+## **product instruction：**
 
-1. Fork this repository.
-2. Create a new branch (`git checkout -b feature/your-feature`).
-3. Commit your changes (`git commit -m 'Add your feature'`).
-4. Push to the branch (`git push origin feature/your-feature`).
-5. Open a Pull Request.
+**1.**  Insert the SIM card with the notch facing inward and downward into the card slot.
 
-## License
+**2.**  Press and hold the power button to turn on the device. Once the screen lights up, say "Xiaozhi, Xiaozhi" to wake up the intelligent assistant.
 
-This project is licensed under the Apache License. See the [LICENSE](https://license/) file for details.
+**3.**  Once the agent responds, the normal conversation can begin.
 
-## Support
+**Ps**：If there is no conversation for a long time, the connection will be disconnected. You can try saying "Xiaozhi, Xiaozhi" again to wake it up or restart the 	product.
 
-If you have any questions or need support, refer to the [QuecPython Documentation](https://python.quectel.com/doc) or open an issue in this repository.
+
+
+
+
+## Software development process
+
+#### device development
+
+#### starting up
+
+After completing the hardware connection work, if a COM port containing the words "Quectel USB" appears in the port list of the computer device manager, it indicates that the computer has successfully booted up.
+
+![comport.png](https://gitee.com/Arronchenzhihe/teedoc_with_qpydoc/raw/main/docs/Application_guide/zh/media/solutions/AIChatBot-Volcengine-webRTC/comport.png)
+
+#### Burn the firmware package
+
+Refer to [this section](https://gitee.com/link?target=https%3A%2F%2Fdeveloper.quectel.com%2Fdoc%2Fquecpython%2FApplication_guide%2Fzh%2Fdev-tools%2FQPYcom%2Fqpycom-dw.html%23%E4%B8%8B%E8%BD%BD%E5%9B%BA%E4%BB%B6), and burn the corresponding firmware package to the development board.
+
+### Script import and execution
+
+1. Refer to [this section](https://gitee.com/link?target=https%3A%2F%2Fdeveloper.quectel.com%2Fdoc%2Fquecpython%2FGetting_started%2Fzh%2F4G%2Ffirst_python.html), import all the files in the `src` folder under the source code directory into the module file system, as shown in the following figure:
+
+<img src="./media/src1.png" style="zoom: 100%;" /> 
+
+Refer to [this section](https://developer.quectel.com/doc/quecpython/Getting_started/zh/4G/first_python.html#executing-script-files), and execute the main program file `_main.py`.
+
+1. Refer to [this section](https://gitee.com/link?target=https%3A%2F%2Fdeveloper.quectel.com%2Fdoc%2Fquecpython%2FGetting_started%2Fzh%2F4G%2Ffirst_python.html%23%E5%81%9C%E6%AD%A2%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C), and stop the program from running.
+
+### Business debugging
+
+### start the application
+
+After executing the `_main.py` script, the program starts to run.
+
+### Equipment Registration Scheme
+
+If Xiaozhi is not registered, normal interaction cannot be carried out. When the program starts, OTA will return the verification code used for the registered device, and then go to [Xiaozhi AI Chatbot console](https://xiaozhi.me/) to register the device. After the registration is completed, run the script again to interact smoothly
+
+<img src="./media/register.png" style="zoom: 100%;" />
+
+### Activate Xiaozhi AI
+
+As shown in the following picture, it is in a state ready to be awakened. A red light will flash on the development board, and you need to use the voice `Xiaozhi, Xiaozhi` to wake up Xiaozhi AI for a voice conversation.
+
+<img src="./media/1.png" style="zoom: 100%;" />
+
+After waking up, data related to connecting to the server or a prompt indicating connection failure will appear. When a connection failure occurs, please check if the network is normal.
+
+<img src="./media/2.png" style="zoom: 100%;" />
+
+When the system has not engaged in a conversation for a long time or has not received any commands, it will automatically enter a sleep state and wait for the next wake-up.
+
+<img src="./media//3.png" style="zoom:100%;" />

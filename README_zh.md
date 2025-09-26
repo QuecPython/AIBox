@@ -1,100 +1,115 @@
-# QuecPython -AIbox聊天机器人
+# AIbox 聊天机器人
 
-## 目录
+## 项目简介
 
-- [介绍](#介绍)
-- [功能特性](#功能特性)
-- [快速开始](#快速开始)
-  - [先决条件](#先决条件)
-  - [安装](#安装)
-  - [运行应用程序](#运行应用程序)
-- [贡献](#贡献)
-- [许可证](#许可证)
-- [支持](#支持)
+本项目是基于Quectel EC800MCNLE开发板的聊天机器人，具有语音识别，情感显示，角色切换，声音模拟的功能。
 
-## 介绍
+我们希望通过这个项目，能够帮助大家了解 AI 硬件开发，将当下飞速发展的大语言模型应用到实际的硬件设备中。
 
-QuecPython 推出了小智平台 AI 聊天机器人解决方案。该方案基于 websocket 协议，具有跨平台特性，可以适用于大部分 QuecPython 模组。
+<img src="./media/AIbox.png" style="zoom: 100%;" />
 
-本案例采用搭载 EC800MCNLE 模组的 AI 开发板。
 
-## 功能特性
 
-- 支持语音中断/打断。
-- 支持自定义关键词语音唤醒。
-- 使用 Python 语言，便于二次开发。
+## 开源目录结构
 
-## 快速开始
+<img src="./media/Directory.png" style="zoom: 100%;" />
 
-### 先决条件
+## 项目功能
 
-在开始之前，请确保您具备以下先决条件：
+**1.  一步到位，终极之选**
 
-- **硬件：**
-  - 联系移远官方获取 AI 开发板及配件。
-  - 电脑（Windows 7、Windows 10 或 Windows 11）
-  - 一套定制外壳
-  - 喇叭
-    - 任意 2-5W 功率的喇叭即可
-    - [移远商城购买链接](https://www.quecmall.com/goods-detail/2c90800c94028da201948249e9f4012d)
-  
-- **软件：**
-  - 调试工具 [QPYcom](https://images.quectel.com/python/2022/12/QPYcom_V3.6.0.zip)
-  - QuecPython 固件（仓库 fw 目录下有 beta 固件）
-  - Python 文本编辑器（例如，[VSCode](https://code.visualstudio.com/)、[Pycharm](https://www.jetbrains.com/pycharm/download/)）
+-  多种AI对话角色，随时切换喜欢的声音
 
-### 安装
+-  多语种对话，可作随身小家教练习外语
 
-1. **克隆仓库**：
-   ```bash
-   git clone https://github.com/QuecPython/AIBox
-   ```
-   
-3. **烧录固件：**
-   按照[说明](https://python.quectel.com/doc/Application_guide/zh/dev-tools/QPYcom/qpycom-dw.html#%E4%B8%8B%E8%BD%BD%E5%9B%BA%E4%BB%B6)将固件烧录到开发板上。
+-  接入多种大模型（豆包，deepseek、Qwen3）,辅助办公，大模型轻松解决
 
-### 运行应用程序
+  <img src="./media/yun.png" style="zoom: 100%;" />
 
-1. **连接硬件：**
-   本案例采用移远 AI 开发板，如有需要请联系官方获取。按照下图进行硬件连接：
-   
-   <img src="./media/AIbox.jpg" style="zoom:50%;" />
-   
-   只需通过 Tpye-C 连接上位机
-   
-2. **将代码下载到设备：**
-   
-   - 启动 QPYcom 调试工具。
-   - 将数据线连接到计算机。
-   - 按下开发板上的 **PWRKEY** 按钮启动设备。
-   - 按照[说明](https://developer.quectel.com/doc/quecpython/Getting_started/zh/4G/first_python.html#PC与模组间的文件传输)将 `code` 文件夹中的所有文件导入到模块的文件系统中，保留目录结构。
-   
-3. **运行应用程序：**
-   
-   - 选择 `File` 选项卡。
-   - 选择 `_main.py` 脚本。
-   - 右键单击并选择 `Run` 或使用`运行`快捷按钮执行脚本。
-   
-4. **关键词唤醒后，即可对话， 参考运行日志：**
 
-   <img src="./media/run.png" style="zoom:80%;" />
 
-5. 参考使用示例视频：`可自行前往本文件夹下的media文件中查看使用示例视频`
+**2.智能记忆+情感可视化，拒绝没有感情的机器人**
 
-## 贡献
+-  **动态上下文管理**：打断后仍记忆对话
+-  **LCD表情反馈**：通过😊/🤔/😠等表情增强交互真实感
 
-我们欢迎对本项目的改进做出贡献！请按照以下步骤进行贡献：
+<img src="./media/emoji.png" style="zoom: 100%;" />
 
-1. Fork 此仓库。
-2. 创建一个新分支（`git checkout -b feature/your-feature`）。
-3. 提交您的更改（`git commit -m 'Add your feature'`）。
-4. 推送到分支（`git push origin feature/your-feature`）。
-5. 打开一个 Pull Request。
+**3.能够随时打断，拒绝AI独白**
 
-## 许可证
+- 传统AI：必须等它"念完脚本"才能继续 ❌
+- 小智AI：支持语音打断，像真人聊天一样自然 ✅
 
-本项目使用 Apache 许可证。详细信息请参阅 [LICENSE](LICENSE) 文件。
 
-## 支持
 
-如果您有任何问题或需要支持，请参阅 [QuecPython 文档](https://python.quectel.com/doc) 或在本仓库中打开一个 issue。
+**4.智能体识别语音意图，自动控制设备**
+
+- “声音有点大，调小一点”；智能体下发音量调整命令，降低音量。
+
+
+
+**5.环保材质外壳，精致耐用手感好**
+
+
+
+## **产品使用说明：**
+
+**1.**  sim卡缺口朝内向下插入卡槽中
+
+**2.**  长按电源键进行开机，待屏幕亮起后，呼叫“小智，小智”进行智能体唤醒
+
+**3.**  智能体进行回应后即可开始进行正常对话
+
+**Ps**：长时间未对话会断开连接，可尝试“小智，小智”再次唤醒或者重启产品
+
+
+
+## 软件开发流程
+
+### 设备开发
+
+#### 开机
+
+完成硬件连接的工作后，电脑设备管理器的端口列表中出现包含 `Quectel USB` 字样的 COM 口，表示开机成功。
+
+![comport.png](https://gitee.com/Arronchenzhihe/teedoc_with_qpydoc/raw/main/docs/Application_guide/zh/media/solutions/AIChatBot-Volcengine-webRTC/comport.png)
+
+#### 烧录固件包
+
+参考[此章节](https://gitee.com/link?target=https%3A%2F%2Fdeveloper.quectel.com%2Fdoc%2Fquecpython%2FApplication_guide%2Fzh%2Fdev-tools%2FQPYcom%2Fqpycom-dw.html%23%E4%B8%8B%E8%BD%BD%E5%9B%BA%E4%BB%B6)，烧录对应型号固件包至开发板。
+
+#### 脚本导入与运行
+
+1. 参考[此章节](https://gitee.com/link?target=https%3A%2F%2Fdeveloper.quectel.com%2Fdoc%2Fquecpython%2FGetting_started%2Fzh%2F4G%2Ffirst_python.html)，将源码目录下 `src` 文件夹中的所有文件导入到模组文件系统，如下图所示：
+
+<img src="./media/src.png" style="zoom: 100%;" /> 
+
+参考[此章节](https://developer.quectel.com/doc/quecpython/Getting_started/zh/4G/first_python.html#执行脚本文件)，执行主程序文件 `_main.py`。
+
+1. 参考[此章节](https://gitee.com/link?target=https%3A%2F%2Fdeveloper.quectel.com%2Fdoc%2Fquecpython%2FGetting_started%2Fzh%2F4G%2Ffirst_python.html%23%E5%81%9C%E6%AD%A2%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C)，停止程序运行。
+
+## 业务调试
+
+### 程序启动
+
+执行 `_main.py` 脚本后，程序开始运行。
+
+### 注册小智
+
+如果小智没有被注册，那么无法进行正常交互，程序启动时OTA会返回注册设备所用的验证码，然后到[小智 AI 聊天机器人控制台](https://xiaozhi.me/)进行设备注册，注册完成后再次运行脚本就可以顺利交互了
+
+<img src="./media/register.png" style="zoom: 100%;" />
+
+### 激活小智
+
+下图所示状态为待唤醒状态，开发板会出现红灯闪烁，需要语音“小智，小智”来唤醒小智AI进行语音对话。
+
+<img src="./media/1.png" style="zoom: 100%;" />
+
+唤醒后会出现连接服务器相关的数据或者是连接失败的提示，当出现连接失败时，请检查网络是否正常。
+
+<img src="./media/2.png" style="zoom: 100%;" />
+
+当系统长时间未进行对话或未接收到命令时会自动断开连接，等待下次唤醒。
+
+<img src="./media/3.png" style="zoom: 100%;" />
