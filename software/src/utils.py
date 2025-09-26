@@ -25,7 +25,7 @@ class AudioManager(object):
         self.aud.setVolume(volume)  # 设置音量
         self.aud.setCallback(self.audio_cb)
         self.rec = audio.Record(channel)
-        self.rec.gain_set(4,10)
+        self.rec.gain_set(3,9)
         self.__skip = 0
         
     def setvolume_down(self):
@@ -110,8 +110,8 @@ class AudioManager(object):
             pass
     
     def start_kws(self):
-        list=["_xiao_zhi_xiao_zhi","_xiao_tian_xiao_tian"]
-        self.rec.ovkws_start("_xiao_zhi_xiao_zhi", 0.7)
+        list=["_xiao_zhi_xiao_zhi","_xiao_tian_xiao_tian","_xiao_zi_xiao_zi","_xiao_shi_xiao_shi","_xiao_si_xiao_si","_xiao_zhi_xiao_zi","_xiao_zi_xiao_zhi"]
+        self.rec.ovkws_start(list, 0.7)
  
 
     def stop_kws(self):

@@ -20,6 +20,7 @@ class Application(object):
 
     def __init__(self):
         Pin(Pin.GPIO33, Pin.OUT, Pin.PULL_PD, 1)
+        self.talk_key = ExtInt(ExtInt.GPIO27, ExtInt.IRQ_RISING_FALLING, ExtInt.PULL_PU, self.on_talk_key_click, 50)
         
         #初始化屏幕
         self.lvgl=lvglManager()
@@ -102,13 +103,12 @@ class Application(object):
                     data = self.audio_manager.opus_read()
                     if self.__voice_activity_event.is_set():
                         # 有人声
-                        sys_bus.publish("update_status","listening")
                         if not is_listen_flag:
                             self.__protocol.abort()
                             self.__protocol.listen("start")
                             is_listen_flag = True
                         self.__protocol.send(data)
-                        # logger.debug("send opus data to server:",data)
+                        # logger.debug("send opus data to server")
                     else:
                         if is_listen_flag:
                             self.__protocol.listen("stop")
@@ -224,6 +224,7 @@ class Application(object):
     def run(self):
         self.charge_manager.enable_charge()
         self.audio_manager.open_opus()
+        self.talk_key.enable()
         self.start_kws()
 
        
