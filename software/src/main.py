@@ -99,14 +99,20 @@ class Application(object):
                 self.__protocol.hello()
                 self.__protocol.wakeword_detected("小智")
                 is_listen_flag = False
+                buffer = []  # 用于缓存最近5帧
                 while True:
                     data = self.audio_manager.opus_read()
+                    buffer.append(data)
+                    if len(buffer) > 7:
+                        buffer.pop(0)
                     if self.__voice_activity_event.is_set():
                         # 有人声
                         if not is_listen_flag:
                             self.__protocol.abort()
                             self.__protocol.listen("start")
                             is_listen_flag = True
+                            for frame in buffer[:6]:  # 发送缓存的前6帧
+                                self.__protocol.send(frame)
                         self.__protocol.send(data)
                         # logger.debug("send opus data to server")
                     else:
