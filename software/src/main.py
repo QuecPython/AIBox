@@ -59,8 +59,7 @@ class Application(object):
         
     def __record_thread_handler(self):
         """纯粹是为了kws&vad能识别才起的线程持续读音频"""
-        logger.debug("record thread handler enter") 
-        count = 0   
+        logger.debug("record thread handler enter")   
         while not self.__record_thread_stop_event.is_set():
             self.audio_manager.opus_read()
             utime.sleep_ms(5)
@@ -133,6 +132,7 @@ class Application(object):
             return
         self.__working_thread = Thread(target=self.__working_thread_handler)
         self.__working_thread.start()
+        self.__keyword_spotting_event.set()
         
     def on_keyword_spotting(self, state):
         logger.info("on_keyword_spotting: {}".format(state))

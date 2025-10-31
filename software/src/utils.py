@@ -27,6 +27,7 @@ class AudioManager(object):
         self.rec = audio.Record(channel)
         self.rec.gain_set(3,9)
         self.__skip = 0
+        self.kws_cb = None 
         
     def setvolume_down(self):
         global volume
@@ -69,13 +70,16 @@ class AudioManager(object):
 
     def open_opus(self):
         self.pcm = audio.Audio.PCM(0, 1, 16000, 2, 1, 15)  # 5 -> 25
-        self.opus = Opus(self.pcm, 0, 6000)  # 6000 ~ 128000
+        self.opus = Opus(self.pcm, 0, 16000)  # 6000 ~ 128000
     
     def close_opus(self):
         self.opus.close()
         self.pcm.close()
         del self.opus
         del self.pcm
+        
+    def pcm_read(self):
+        return self.pcm.read(320)
     
     def opus_read(self):
         return self.opus.read(60)
@@ -86,8 +90,8 @@ class AudioManager(object):
     # ========= vad & kws ====================
 
     def set_kws_cb(self, cb):
-        self.rec.ovkws_set_callback(cb)
-
+        self.kws_cb=cb
+        self.rec.ovkws_set_callback(self.kws_cb)
             
     def set_vad_cb(self, cb):
         def wrapper(state):
@@ -110,7 +114,7 @@ class AudioManager(object):
             pass
     
     def start_kws(self):
-        list=["_xiao_zhi_xiao_zhi","_xiao_zi_xiao_zi","_xiao_zhi_xiao_zi","_xiao_zi_xiao_zhi"]
+        list=["_xiao_zhi_xiao_zhi","_xiao_zhi_xiao_zi","_xiao_zi_xiao_zhi"]
         self.rec.ovkws_start(list, 0.7)
  
 
