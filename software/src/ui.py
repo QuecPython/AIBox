@@ -24,7 +24,7 @@ screen.set_flex_align(lv.FLEX_ALIGN.SPACE_EVENLY, lv.FLEX_ALIGN.CENTER, lv.FLEX_
 screen.set_flex_flow(lv.FLEX_FLOW.COLUMN)
 # Create screen_gif
 screen_gif = lv.gif(screen)
-screen_gif.set_src("U:/media/happy.gif")
+screen_gif.set_src("U:/media/sleep.gif")
 screen_gif.set_style_bg_color(lv.color_hex(0x000000), 0)  # 黑色背景
 screen_gif.set_style_bg_opa(lv.OPA.COVER, 0)
 screen_gif.set_size(240, 240)

@@ -114,7 +114,7 @@ class AudioManager(object):
             pass
     
     def start_kws(self):
-        list=["_xiao_zhi_xiao_zhi","_xiao_zhi_xiao_zi","_xiao_zi_xiao_zhi"]
+        list=["_xiao_zhi_xiao_zhi","_xiao_zi_xiao_zhi"]
         self.rec.ovkws_start(list, 0.7)
  
 
