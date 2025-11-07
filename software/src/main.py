@@ -14,7 +14,7 @@ from usr.ui import *
 import ujson as json
 
 logger = getLogger(__name__)
-
+perv_emoj="sleep"
 
 class Application(object):
 
@@ -54,6 +54,8 @@ class Application(object):
         self.__record_thread_stop_event = Event()
         self.__voice_activity_event = Event()
         self.__keyword_spotting_event = Event()
+        
+        self.perv_emoj="sleep"
 
 
         
@@ -92,10 +94,12 @@ class Application(object):
         self.start_kws()
 
     def __chat_process(self):
+        global perv_emoj
         self.start_vad()
         try:
             with self.__protocol:
                 self.__protocol.hello()
+                perv_emoj="sleep"
                 self.__protocol.wakeword_detected("小智")
                 is_listen_flag = False
                 buffer = []  # 用于缓存最近5帧
@@ -166,14 +170,6 @@ class Application(object):
 
     def handle_tts_message(self, msg):
         pass
-        # state = msg["state"]
-        # if state == "start":
-        #     sys_bus.publish("update_status","speaking")
-        # elif state == "stop":
-        #     sys_bus.publish("update_status","listening")
-        # else:
-        #     pass
-        # raise NotImplementedError("handle_tts_message not implemented")
     
     
     
@@ -211,9 +207,6 @@ class Application(object):
     def handle_llm_message(data, msg):
         emoj_value = msg["emotion"]
         global perv_emoj
-        if 'perv_emoj' not in globals():
-            perv_emoj = None
-
         if perv_emoj != emoj_value:
             print("emoj_value: ", emoj_value)
             sys_bus.publish("update_emoji", emoj_value)
@@ -238,6 +231,6 @@ class Application(object):
 
 
 if __name__ == "__main__":
-    sys_bus.publish("update_screen","init_screen")
+    sys_bus.publish("update_screen",perv_emoj)
     app = Application()
     app.run()
